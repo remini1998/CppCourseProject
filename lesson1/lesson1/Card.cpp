@@ -36,7 +36,7 @@ float Card::di(Line* line, std::string currentStop)
 		return -1;
 	}
 	//如果是第一次上车
-	else if (this->nowLine) {
+	else if (!this->nowLine) {
 		this->nowLine = line;
 		getOnStop = currentStop;
 		return 0;
@@ -44,10 +44,13 @@ float Card::di(Line* line, std::string currentStop)
 	//检测是否是下车
 	else if (Line::equal(line, nowLine)) {
 		float distance = nowLine->calcDistance(getOnStop, currentStop);
+		//printf("%f\n", distance);
 		float fee = calcPrice(distance);
+		printf("%f\n", fee);
 		balance -= fee;
 		getOnStop = "";
 		this->nowLine = NULL;
+		return fee;
 		//请注意，因为考虑line可能为公用，所以这里没有释放line占用的内存空间。实际使用时应该注意释放
 	}
 	//上车，但是上次下车没刷卡

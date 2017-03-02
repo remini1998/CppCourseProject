@@ -3,24 +3,38 @@
 
 #include "stdafx.h"
 #include <map>
+#include <iostream>
 #include "line.h"
 #include "Card.h"
+
+using namespace std;
 
 int main()
 {
 	//TestCase1
-	std::map<std::string, float>* map = new std::map<std::string, float>();
-	map->insert(std::map<std::string, float>::value_type("Ë®ĞÇ", 0));
-	map->insert(std::map<std::string, float>::value_type("ÍÁĞÇ", 4));
-	map->insert(std::map<std::string, float>::value_type("Ë®ĞÇ", 5));
-	map->insert(std::map<std::string, float>::value_type("µØÇò", 10));
-	map->insert(std::map<std::string, float>::value_type("»ğĞÇ", 11));
-	map->insert(std::map<std::string, float>::value_type("Ä¾ĞÇ", 18));
+	map<string, float>* map = new std::map<string, float>();
+	map->insert(std::map<string, float>::value_type("Ë®ĞÇ", 40));
+	map->insert(std::map<string, float>::value_type("ÍÁĞÇ", 44));
+	map->insert(std::map<string, float>::value_type("µØÇò", 310));
+	map->insert(std::map<string, float>::value_type("»ğĞÇ", 315));
+	map->insert(std::map<string, float>::value_type("Ä¾ĞÇ", 438));
 	Line* line = new Line(798, map);
 	Card* card1 = new Card();
 	Card* card2 = new Card(Card::Student);
+
 	card1->recharge(20);
 	card2->recharge(6);
+
+	cout << "AË¢¿¨ÉÏ³µ£¬¿Û·Ñ£º" << card1->di(line, "»ğĞÇ") << endl;
+	cout << "BË¢¿¨ÉÏ³µ£¬¿Û·Ñ£º" << card2->di(line, "»ğĞÇ") << endl;
+
+	cout << "AË¢¿¨ÏÂ³µ£¬¿Û·Ñ£º" << card1->di(line, "µØÇò") << endl;
+	cout << "BË¢¿¨ÏÂ³µ£¬¿Û·Ñ£º" << card2->di(line, "ÍÁĞÇ") << endl;
+
+	cout << "AÓà¶î£º" << card1->getBalance() << endl;
+	cout << "BÓà¶î£º" << card2->getBalance() << endl;
+	
+	system("pause");
     return 0;
 }
 

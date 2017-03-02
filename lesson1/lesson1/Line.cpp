@@ -37,12 +37,16 @@ float Line::getMaxDistance()
 
 bool Line::equal(Line* a, Line* b)
 {
+	if (!a || !b) return false;
 	if (a->busNum != b->busNum)
 		return false;
 	if (a->busStop->size() != b->busStop->size()) return false;
-	for (int i = 0; i < a->busStop->size(); i++) 
+	std::map<std::string, float>::iterator iterA;
+	std::map<std::string, float>::iterator iterB;
+	for (iterA = a->busStop->begin(), iterB = b->busStop->begin(); iterA != a->busStop->end(); iterA++, iterB++)
 	{
-		if (a->busStop[i] != a->busStop[i]) return false;
+		if (iterA->first != iterB->first) return false;
+		if (iterA->second != iterB->second) return false;
 	}
 	return true;
 }
